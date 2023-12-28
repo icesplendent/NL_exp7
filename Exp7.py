@@ -46,13 +46,18 @@ period_27_lam_s = np.zeros(355)
 period_27_lam_i = np.zeros(355)
 period_26_lam_s = np.zeros(355)
 period_26_lam_i = np.zeros(355)
-period_31_lam_s = np.zeros(355)
-period_31_lam_i = np.zeros(355)
+period_31_lam_s = np.zeros(191)
+period_31_lam_i = np.zeros(191)
 period_32_lam_s = np.zeros(355)
 period_32_lam_i = np.zeros(355)
 initial_guess = 0.0
 
 # Use fsolve to find the numerical solution
+for i in range (0, 191):
+    initial_guess = [1.855]
+    period_31_lam_s[i] = fsolve(equation_to_solve, initial_guess, args=(i, 31))
+    period_31_lam_i[i] = lam_1(period_31_lam_s[i])
+
 for i in range (0, 355):
     initial_guess = [1.515]
     period_30_lam_s[i] = fsolve(equation_to_solve, initial_guess, args=(i, 30))
@@ -75,10 +80,6 @@ for i in range (0, 355):
     period_26_lam_i[i] = lam_1(period_26_lam_s[i])
 
     initial_guess = [1.855]
-    period_31_lam_s[i] = fsolve(equation_to_solve, initial_guess, args=(i, 31))
-    period_31_lam_i[i] = lam_1(period_31_lam_s[i])
-
-    initial_guess = [1.855]
     period_32_lam_s[i] = fsolve(equation_to_solve, initial_guess, args=(i, 32))   # out of range
     period_32_lam_i[i] = lam_1(period_32_lam_s[i])
 
@@ -88,8 +89,9 @@ print(period_32_lam_s)
 
 # Plot with lam V.S. T
 x = np.linspace(0, 354, 355)                        # Temperature
-plt.plot(x, period_31_lam_s, label="31μm", color='red')
-plt.plot(x, period_31_lam_i, color='red')
+x2 = np.linspace(0, 190, 191)  
+plt.plot(x2, period_31_lam_s, label="31μm", color='red')
+plt.plot(x2, period_31_lam_i, color='red')
 plt.plot(x, period_30_lam_s, label="30μm", color='orange')
 plt.plot(x, period_30_lam_i, color='orange')
 plt.plot(x, period_29_lam_s, label="29μm", color='yellow')
