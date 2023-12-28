@@ -111,5 +111,8 @@ plt.legend()
 # plt.text(0.5, 1.5, '25 deg. C', color='blue')
 # plt.text(1.5, 0.5, '200 deg. C', color='orange')
 
+plt.xlabel('Temperature (°C)')
+plt.ylabel('Wavelength (μm)')
+
 plt.ylim([1, 5])
 plt.show()
